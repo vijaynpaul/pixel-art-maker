@@ -1,37 +1,53 @@
 // Select color input
-
+var colorEl = document.getElementById('colorPicker');
 
 // Select size input
+const heightEl = document.getElementById('inputHeight');
+const widthEl = document.getElementById('inputWidth');
 
-var height,width, color;
-// When size is submitted by the user, call makeGrid()
-//creating the grid
-$('#sizePicker').submit(function(event) {
-    event.preventDefault();
-    height = $('#inputHeight').val();
-    width = $('#inputWidth').val();
-  makeGrid(height,width);
-  console.log('height:'+ height+'  width:'+ width);
-})
-
-function makeGrid(x,y){
-  $('tr').remove();
-
+var canvas = document.getElementById('pixelCanvas')
+const submit = document.getElementById('submitbutton')
 // Your code goes here!
-for (var i=1;i<=x;i++){
-  $('#pixelCanvas').append('<tr id=table' + i + '></tr>');
-  for(var j = 1;j<=y;j++){
-    $('#table' + i).append('<td></td>');
-  }
-}
-//add color to the cell
-$('td').click(function addColor(){
-  color = $('#colorPicker').val();
+// When size is submitted by the user, call makeGrid()
+// Taking the user input and storing it
+submit.addEventListener("click", function(event)  {
+  event.preventDefault();
+  const row = heightEl.value;
+  const column = widthEl.value;
+makeGrid(row,column);
+console.log('height:'+ row +'  width:'+column);
 
-  if ($(this).attr('style')){
-    $(this).removeAttr('style')
-  } else{
-    $(this).attr('style', 'background-color:' + color);
+
+//creating the grid with the input values 
+function makeGrid(){
+  canvas.innerHTML='';
+//Insert rows and columns
+for(var i = 0; i < row; i++){
+  let canvasRow = canvas.insertRow(i);
+  for(var j = 0;j < column;j++){
+    canvasRow.insertCell(j);
   }
-})
 }
+}});
+document.getElementById('colorPicker').addEventListener("change", function(event){
+  event.preventDefault();
+  colorEl =this.value;
+  console.log(colorEl); 
+ 
+}
+) ;
+
+
+canvas.addEventListener('click', function(e){
+e.stopPropagation();
+let td = e.target;
+// unclick the color cell
+if (td.hasAttribute("style")){
+  td.removeAttribute("style");}
+else{
+  td.style.backgroundColor = colorEl;
+}
+
+
+console.log(td.style);
+});
