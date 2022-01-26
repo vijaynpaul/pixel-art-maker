@@ -2,33 +2,42 @@
 var colorEl = document.getElementById('colorPicker');
 
 // Select size input
-const heightEl = document.getElementById('inputHeight');
-const widthEl = document.getElementById('inputWidth');
+/*var heightEl = document.getElementById('inputHeight');
+var widthEl = document.getElementById('inputWidth');*/
 
 var canvas = document.getElementById('pixelCanvas')
 const submit = document.getElementById('submitbutton')
+
 // Your code goes here!
 // When size is submitted by the user, call makeGrid()
 // Taking the user input and storing it
+
+
+
 submit.addEventListener("click", function(event)  {
   event.preventDefault();
-  const row = heightEl.value;
-  const column = widthEl.value;
+  event.stopPropagation();
+  let row = document.getElementById('inputHeight').value;
+  let column = document.getElementById('inputWidth').value;
 makeGrid(row,column);
 console.log('height:'+ row +'  width:'+column);
+}); 
+
 
 
 //creating the grid with the input values 
-function makeGrid(){
+function makeGrid(row,column){
   canvas.innerHTML='';
-//Insert rows and columns
 for(var i = 0; i < row; i++){
-  let canvasRow = canvas.insertRow(i);
+  let canvasRow = canvas.insertRow(i);  
   for(var j = 0;j < column;j++){
     canvasRow.insertCell(j);
   }
+ }
+
 }
-}});
+console.log(canvas);
+
 document.getElementById('colorPicker').addEventListener("change", function(event){
   event.preventDefault();
   colorEl =this.value;
