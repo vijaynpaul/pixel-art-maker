@@ -3,18 +3,18 @@ var colorEl = document.getElementById('colorPicker');
 
 // Select size input
 
-var canvas = document.getElementById('pixelCanvas')
-const submit = document.getElementById('submitbutton')
+var canvas = document.getElementById('pixelCanvas');
+var submit = document.getElementById('submitbutton');
 
 // Your code goes here!
 // When size is submitted by the user, call makeGrid()
 
 submit.addEventListener("click", function(event) {
 	event.preventDefault();
-	event.stopPropagation();
 	let row = document.getElementById('inputHeight').value;
 	let column = document.getElementById('inputWidth').value;
 	makeGrid(row, column);
+	event.stopPropagation();
 	console.log('height:' + row + '  width:' + column);
 });
 
@@ -41,15 +41,13 @@ document.getElementById('colorPicker').addEventListener("change", function(event
 });
 
 
-canvas.addEventListener('click', function(e){
-  e.stopPropagation();
-  let td = e.target;
-  // unclick the color cell
-  if (td.style.backgroundColor == colorEl) {
-  } else {
-  td.style.backgroundColor = colorEl;
-  }
-  
-  console.log(td.style);
-  });
+canvas.addEventListener('click', function(e) {
+	e.stopPropagation();
+	let td = e.target;
+	// unclick the color cell
+	if (td.style.backgroundColor == colorEl) {} else {
+		td.style.backgroundColor = colorEl;
+	}
 
+	console.log(td.style);
+});
